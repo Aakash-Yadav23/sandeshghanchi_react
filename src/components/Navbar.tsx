@@ -1,20 +1,32 @@
-import React, { useState } from "react";
+import React, { Dispatch, useState } from "react";
 import Img from "../public/logo.png";
-import {FcMenu} from "react-icons/fc"
+import { FcMenu } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import Dropdown from "./Dropdown";
+import { useDispatch, useSelector } from "react-redux";
+import Loader from "./loader/Loader";
+import { logout } from "../redux/action/UserAction";
 
 const Navbar = () => {
   // const [open, setOpen] = useState(false);
   const [navbar, setNavbar] = useState(false);
+  const dispatch: Dispatch<any> = useDispatch();
 
-  const handleClick = () => {
-    alert("open")
+  const { loading, error, isAuthenticated, user } = useSelector(
+    (state: any) => {
+      return state.user;
+    }
+  );
+  console.log("loading", user?.user);
+  const handleLogout= async() => {
+    dispatch(logout())
+  };
+
+  if (loading) {
+    return <Loader />;
   }
 
-
   return (
-
     <>
       <nav className="w-full md:w-full sm:w-full bg-[#C10A39] shadow">
         <div className="justify-between px-4 mx-auto md:w-full lg:max-w-8xl md:items-center md:flex md:px-8">
@@ -57,15 +69,15 @@ const Navbar = () => {
                       />
                     </svg>
                   )}
-
                 </button>
               </div>
             </div>
           </div>
           <div>
             <div
-              className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${navbar ? "block" : "hidden"
-                }`}
+              className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
+                navbar ? "block" : "hidden"
+              }`}
             >
               <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
                 <li className="text-white hover:text-indigo-200">
@@ -93,43 +105,61 @@ const Navbar = () => {
                   <Link to="/about">About</Link>
                 </li>
               </ul>
-
-              <div className="mt-3 space-y-2 lg:hidden md:inline-block">
-                    <Link
-                        to="/login"
-                        className="inline-block w-full px-4 py-2 text-center text-white bg-[#b90434] rounded-md shadow hover:bg-[#a3485f]"
-                    >
-                        लॉग इन
-                    </Link>
-                    <Link
-                        to="/signup"
-                        className="inline-block w-full px-4 py-2 text-center text-white bg-[#b90434] rounded-md shadow hover:bg-[#a3485f]"
-                    >
-                        साइन अप
-                    </Link>
+              {isAuthenticated ? (
+                <>
+                <div className="lg:hidden cursor-pointer md:inline-block inline-block w-fit px-4 py-2 text-center text-white bg-[#b90434] rounded-md shadow hover:bg-[#a3485f]">
+                  <p>{user?.user?.fullName}</p>
                 </div>
-
-
-              {/* <div className="mt-3 space-y-2 lg:hidden md:inline-block border-white rounded-md " onClick={handleClick}>
-                <Hamburger size={22} color="white" />
-              </div> */}
+                <div
+                onClick={handleLogout}
+                    className="inline-block cursor-pointer lg:hidden md:inline-block  w-full px-4 py-2 text-center text-white bg-[#b90434] rounded-md shadow hover:bg-[#a3485f]"
+                   >
+Logout
+                </div>
+                </>
+              ) : (
+                <div className="mt-3 space-y-2 lg:hidden md:inline-block">
+                  <Link
+                    to="/login"
+                    className="inline-block w-full px-4 py-2 text-center text-white bg-[#b90434] rounded-md shadow hover:bg-[#a3485f]"
+                  >
+                    लॉग इन
+                  </Link>
+                  <Link
+                    to="/signup"
+                    className="inline-block w-full px-4 py-2 text-center text-white bg-[#b90434] rounded-md shadow hover:bg-[#a3485f]"
+                  >
+                    साइन अप
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
-          <div className="hidden space-x-2 md:inline-block">
-                    <Link
-                        to="/login"
-                        className="px-4 py-2 text-white bg-[#b90434] rounded-md shadow hover:bg-[#a3485f]"
-                    >
-                        लॉग इन
-                    </Link>
-                    <Link
-                        to="/signup"
-                        className="px-4 py-2 text-white bg-[#b90434] rounded-md shadow hover:bg-[#a3485f]"
-                    >
-                        साइन अप
-                    </Link>
-                </div>
-  
+          {isAuthenticated ? (
+            <div className="flex gap-[25px]">
+              <div className="hidden md:inline-block  cursor-pointer w-fit px-4 py-2 text-center text-white bg-[#b90434] rounded-md shadow hover:bg-[#a3485f]">
+                <p>{user?.user?.fullName}</p>
+              </div>
+              <div onClick={handleLogout} className="px-4 py-2 text-white bg-[#b90434] cursor-pointer rounded-md shadow hover:bg-[#a3485f]">
+                Logout
+              </div>
+            </div>
+          ) : (
+            <div className="hidden space-x-2 md:inline-block">
+              <Link
+                to="/login"
+                className="px-4 py-2 text-white bg-[#b90434] rounded-md shadow hover:bg-[#a3485f]"
+              >
+                लॉग इन
+              </Link>
+              <Link
+                to="/signup"
+                className="px-4 py-2 text-white bg-[#b90434] rounded-md shadow hover:bg-[#a3485f]"
+              >
+                साइन अप
+              </Link>
+            </div>
+          )}
         </div>
       </nav>
     </>

@@ -81,11 +81,14 @@ export const login =
   (email: string, password: string) => async (dispatch: Dispatch<any>) => {
     try {
       dispatch({ type: LOGIN_REQUEST });
-
+      const requestData = {
+        email: email,
+        password: password,
+      };
       const config = { headers: { "Content-Type": "application/json" } };
       const { data }: AxiosResponse = await axios.post(
         `${API_URL}/api/v1/login`,
-        { email, password },
+        requestData,
         config
       );
 
@@ -190,7 +193,8 @@ export const loadUser = () => async (dispatch: Dispatch<any>) => {
 export const logout = () => async (dispatch: Dispatch<any>) => {
   try {
     await axios.get(`${API_URL}/api/v1/logout`);
-
+    const cookies = new Cookies();
+    cookies.remove("token");
     dispatch({ type: LOGOUT_SUCCESS });
   } catch (error: any) {
     const errorMessage =
