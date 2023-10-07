@@ -54,7 +54,6 @@ const initialState: User = {
   isAuthenticated: false,
   user: null,
   error: null,
-  
 };
 
 export const userReducer = (state: User = initialState, action: any) => {

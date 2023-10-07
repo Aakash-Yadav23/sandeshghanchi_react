@@ -175,7 +175,7 @@ export const loadUser = () => async (dispatch: Dispatch<any>) => {
       token: token
     };
 
-    const { data }: AxiosResponse = await axios.post(`${API_URL}/api/v1/me`, requestBody);
+    const { data }: AxiosResponse = await axios.post(`${API_URL}/api/v1/me?token=${token}`);
 
 
     dispatch({ type: LOAD_USER_SUCCESS, payload: data });
@@ -325,9 +325,6 @@ export const deleteUser = (id: string) => async (dispatch: Dispatch<any>) => {
 };
 
 // Clearing Errors
-export const clearErrors = () => async (dispatch: Dispatch<any>) => {
-  dispatch({ type: CLEAR_ERRORS });
-};
 
 // updatePassword
 export const updatePassword =
@@ -418,4 +415,10 @@ export const resetPassword =
         payload: errorMessage,
       });
     }
+  };
+
+
+  export const clearErrors = () => async (dispatch:Dispatch<any>) => {
+  
+    dispatch({ type: CLEAR_ERRORS });
   };

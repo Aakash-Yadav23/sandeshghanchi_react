@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import logo from "./logo.svg";
 import "./App.css";
+
+
 import Home from "./pages/home/page";
 import User from "./pages/user/page";
 import SignupPage from "./pages/signup/page";
@@ -28,12 +30,19 @@ import { useSelector } from "react-redux";
 import store from "./redux/store";
 import { loadUser } from "./redux/action/UserAction";
 import Loader from "./components/loader/Loader";
+import { getAllNewsAction } from "./redux/action/NewsAction";
+import EditNews from "./pages/edit/page";
 
 function App() {
   const { isAuthenticated, loading, user } = useSelector((state:any) => state?.user)
- 
+  // const dispatch: Dispatch<any> = useDispatch();
+  // const { loading:newLoading, error, News } = useSelector((state:any) => {
+  //   return state.news;
+  // });
   useEffect(()=>{
     store.dispatch(loadUser());
+
+
   },[])
  if (loading) {
   return <Loader/>
@@ -47,6 +56,7 @@ function App() {
         <Routes>
 
           <Route path="/" element={<Home />} />
+          <Route path="/:keyword" element={<Home/>} />
           <Route path="/user" element={<User />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage />} />
@@ -62,6 +72,8 @@ function App() {
           <Route path="/magazinelist" element={<MagazineList />} />
           <Route path="/marriage" element={<Marriage />} />
           <Route path="/newsList" element={<NewsList />} />
+          <Route path="/edit/:id" element={<EditNews />} />
+
           <Route path="/organization" element={<Organization />} />
           <Route path="/organizationlist" element={<OrganisationList />} />
           <Route path="/servicelist" element={<ServiceList />} />

@@ -2,7 +2,7 @@ import React from "react";
 import HomeForm from "../../components/HomeForm";
 
 
-const NewsList = () => {
+const EditNews = () => {
 
   return (
     <div className="relative text-red-600 w-full ">
@@ -13,4 +13,4 @@ const NewsList = () => {
   );
 };
 
-export default NewsList;
+export default EditNews;
