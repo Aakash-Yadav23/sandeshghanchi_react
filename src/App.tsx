@@ -77,7 +77,7 @@ function App() {
           <Route path="/organization" element={<Organization />} />
           <Route path="/organizationlist" element={<OrganisationList />} />
           <Route path="/servicelist" element={<ServiceList />} />
-          <Route path="/summary" element={<Summary />} />
+          <Route path="/summary/:id" element={<Summary />} />
 
           <Route path="/" element={<Home />} />
         </Routes>

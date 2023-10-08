@@ -63,13 +63,14 @@ export const createNewsAction =
   };
 
 export const detailsNewsAction =
-  (NEWSId: string) => async (dispatch: any) => {
+  (id: string) => async (dispatch: any) => {
     try {
       dispatch({ type: NEWS_DETAILS_GET_REQUEST });
 
-      const { data } = await axios.get(`${API_URL}/news/${NEWSId}`);
+      const response= await axios.get(`${API_URL}/api/v1/news/${id}`);
 
-      dispatch({ type: NEWS_DETAILS_GET_SUCCESS, payload: data });
+      console.log('datta',response.data)
+      dispatch({ type: NEWS_DETAILS_GET_SUCCESS, payload: response.data });
     } catch (error: any) {
       dispatch({
         type: NEWS_DETAILS_GET_FAIL,

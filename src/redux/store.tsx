@@ -3,7 +3,7 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import { allUsersReducer, forgotPasswordReducer, profileReducer, userDetailsReducer, userReducer } from "./reducers/UserReducers";
-import { AllNewsDetailsGetReducer } from "./reducers/NewsReducers";
+import { AllNewsDetailsGetReducer, NewsDetailsGetReducer } from "./reducers/NewsReducers";
 
 
 
@@ -11,7 +11,7 @@ import { AllNewsDetailsGetReducer } from "./reducers/NewsReducers";
 const reducer = combineReducers({
   user:userReducer,
   news:AllNewsDetailsGetReducer,
-
+  newsDetails:NewsDetailsGetReducer,
   forgotPassword:forgotPasswordReducer,
   allUsers:allUsersReducer,
   profile:profileReducer,

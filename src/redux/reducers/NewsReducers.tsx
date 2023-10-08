@@ -20,24 +20,35 @@ import {
 interface NewsState {
   loading: boolean;
   News: [];
-  NewsDetails: {};
   resultPerPage:null,
   newsCount:null,
   error: null;
 }
 
-interface CreateNewsState extends NewsState {
+interface CreateNewsState  {
   NewsCreated: boolean;
+  loading: boolean;
+  NewsDetails: {},
+  error: null;
 }
 
-interface GetNewsDetailsState extends NewsState {}
+interface GetNewsDetailsState {
+  loading: boolean;
+  NewsDetails: {},
+  error: null;
+}
 
-interface DeleteNewsDetailsState extends NewsState {
+interface DeleteNewsDetailsState {
   deleted: boolean;
+  loading: boolean;
+  error: null;
 }
 
-interface UpdateNewsDetailsState extends NewsState {
+interface UpdateNewsDetailsState{
   success: boolean;
+  loading: boolean;
+  NewsDetails: {},
+  error: null;
 }
 
 const initialState: NewsState = {
@@ -45,47 +56,42 @@ const initialState: NewsState = {
   News: [],
   resultPerPage:null,
   newsCount:null,
-  NewsDetails: {},
+
   error: null,
 };
 
 const initialStateCreateNews: CreateNewsState = {
   loading: false,
-  News: [],
+
   NewsDetails: {},
   error: null,
   NewsCreated: false,
-  resultPerPage:null,
-  newsCount:null,
 };
 
 const initialStateUpdateNews: UpdateNewsDetailsState = {
   loading: false,
-  News: [],
+
   NewsDetails: {},
   error: null,
   success: false,
-  resultPerPage:null,
-  newsCount:null,
+
 };
 
 const initialStateDeleteNews: DeleteNewsDetailsState = {
   loading: false,
-  News: [],
-  NewsDetails: {},
+
+  
   error: null,
   deleted: false,
-  resultPerPage:null,
-  newsCount:null,
+ 
 };
 
 const initialStateGetNewsDetails: GetNewsDetailsState = {
   loading: false,
-  News: [],
+
   NewsDetails: {},
   error: null,
-  resultPerPage:null,
-  newsCount:null,
+
 };
 
 export const AllNewsDetailsGetReducer = (
@@ -141,7 +147,7 @@ export const NewsDetailsGetReducer = (
       return {
         ...state,
         loading: false,
-        NEWSDetails: action.payload,
+        NewsDetails: action.payload.data,
         error: null,
       };
 
@@ -149,7 +155,7 @@ export const NewsDetailsGetReducer = (
       return {
         ...state,
         loading: false,
-        NEWSDetails: null,
+        NewsDetails: null,
         error: action.payload,
       };
     case NEWS_CLEAR_ERRORS:
