@@ -7,6 +7,9 @@ interface InputProps {
   primary?: boolean;
   secondary?: boolean;
   icons?: React.ReactNode;
+  disable?:boolean
+  required?:boolean
+
 }
 
 const Input: React.FC<InputProps> = ({
@@ -15,7 +18,9 @@ const Input: React.FC<InputProps> = ({
   onChange,
   primary,
   secondary,
+  disable,
   icons,
+  required
 }) => {
   const inputClasses = `
      rounded-[8px]
@@ -24,7 +29,10 @@ const Input: React.FC<InputProps> = ({
     w-full
     ${primary ? 'border-primary border ' : ''}
     ${secondary ? 'border-secondary' : ''}
+    
   
+
+    
     p-2
     ${icons ? 'pl-8 pr-2' : 'px-2'}
   `;
@@ -43,6 +51,8 @@ const Input: React.FC<InputProps> = ({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        disabled={disable}
+        required={required}
       />
     </div>
   );

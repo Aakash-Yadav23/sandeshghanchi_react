@@ -96,13 +96,13 @@ export const getAllNewsAction =
   };
 
 export const updateNewsAction =
-  (NEWSId: string, updatedData: any) => async (dispatch: any) => {
+  (id: string, updatedData: any) => async (dispatch: any) => {
     try {
       dispatch({ type: NEWS_UPDATE_REQUEST });
       const cookies = new Cookies();
       const token = cookies.get("token");
 
-      const url = `${API_URL}/api/v1/news/${NEWSId}?token=${token}`;
+      const url = `${API_URL}/api/v1/news/${id}?token=${token}`;
 
       const { data } = await axios.put(`${url}`, updatedData);
 
