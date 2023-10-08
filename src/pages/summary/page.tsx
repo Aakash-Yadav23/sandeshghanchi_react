@@ -71,11 +71,15 @@ const  {title, description, img, location} = NewsDetails as summaryProps;
           <div className="mt-4 flex gap-4 justify-between relative -top-28">
             <div className="w-1/2">
               {
-                NewsDetails?.images?.map((img:any)=>{
-
-                  <img src={img?.url} alt="img 2" className="w-full h-auto" />
-                })
-              }
+           NewsDetails?.images?.map((img: any, index: number) => (
+            <img
+              key={index}
+              src={img?.url}
+              alt={`Preview ${index}`}
+              className="preview-image"
+            />
+          ))}
+           
             </div>
           
           </div>
