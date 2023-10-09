@@ -93,7 +93,7 @@ export const login =
       );
 
       const token = data.id;
-
+      localStorage.setItem('token',token)
       // Set the token in a cookie
       setCookie("token", token, 7); //
 
@@ -146,6 +146,8 @@ export const register =
 
       // Set the token in a cookie
       setCookie("token", token, 7);
+      localStorage.setItem('token',token)
+
       dispatch({ type: REGISTER_USER_SUCCESS, payload: data });
       toast.success("Registration successful");
     } catch (error: any) {
@@ -195,6 +197,8 @@ export const logout = () => async (dispatch: Dispatch<any>) => {
     await axios.get(`${API_URL}/api/v1/logout`);
     const cookies = new Cookies();
     cookies.remove("token");
+    localStorage.removeItemItem('token')
+
     dispatch({ type: LOGOUT_SUCCESS });
   } catch (error: any) {
     const errorMessage =

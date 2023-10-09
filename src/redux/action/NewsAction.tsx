@@ -48,7 +48,7 @@ export const createNewsAction =
     try {
       dispatch({ type: NEWS_CREATE_REQUEST });
       const cookies = new Cookies();
-      const token = cookies.get("token");
+      const token = cookies.get("token")||localStorage.getItem('token');
 
       const url = `${API_URL}/api/v1/news/new?token=${token}`;
 
