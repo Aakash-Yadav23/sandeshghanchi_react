@@ -100,8 +100,7 @@ export const updateNewsAction =
     try {
       dispatch({ type: NEWS_UPDATE_REQUEST });
       const cookies = new Cookies();
-      const token = cookies.get("token");
-
+      const token = cookies.get("token")||localStorage.getItem('token');
       const url = `${API_URL}/api/v1/news/${id}?token=${token}`;
 
       const { data } = await axios.put(`${url}`, updatedData);
@@ -119,7 +118,7 @@ export const deleteNewsAction = (NEWSId: string) => async (dispatch: any) => {
   try {
     dispatch({ type: NEWS_DELETE_REQUEST });
     const cookies = new Cookies();
-    const token = cookies.get("token");
+    const token = cookies.get("token")||localStorage.getItem('token');
 
     const url = `${API_URL}/api/v1/news/${NEWSId}?token=${token}`;
 
