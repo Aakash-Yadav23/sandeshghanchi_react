@@ -187,7 +187,7 @@ const NewsFeed: React.FC = () => {
         <div className="pt-6 pb-12">
         
         {SocialNews?.map((news:any, index:number) => (
-       <Link to={`/summary/${news._id}`} key={news._id} className={openTab === 2 ? "block" : "hidden"}>
+       <div key={news._id} className={openTab === 2 ? "block" : "hidden"}>
             <div className="container w-100 lg:w-4/5 mx-auto flex flex-col">
               <div
                 v-for="card in cards"
@@ -196,12 +196,12 @@ const NewsFeed: React.FC = () => {
               >
                 <div className="w-full py-4 px-6 text-gray-800 flex flex-col justify-between">
                   <div>
-                    <h1 className="font-semibold text-lg leading-tight truncate lg:text-5xl md:text-5xl text-[#B80433] max-w-[770px] pt-4">
+                    <Link to={`/summary/${news._id}`}  className="font-semibold text-lg leading-tight truncate lg:text-5xl md:text-5xl text-[#B80433] max-w-[770px] pt-4">
                       {news?.title}
-                    </h1>
-                    <p className="mt-2 text-lg text-[#434343] max-w-[770px] line-clamp-4">
+                    </Link>
+                    <Link to={`/summary/${news._id}`}  className="mt-2 text-lg text-[#434343] max-w-[770px] line-clamp-4">
                       {news.description}
-                    </p>
+                    </Link>
                   </div>
                   <div className="text-sm text-gray-700 uppercase flex items-center justify-between tracking-wide font-semibold mt-2">
                     <span className="flex text-[#EC5D82] text-md">
@@ -254,7 +254,7 @@ const NewsFeed: React.FC = () => {
             </div>
 
             {/* <!--/ card--> */}
-          </Link>
+          </div>
         ))}
       </div>
 

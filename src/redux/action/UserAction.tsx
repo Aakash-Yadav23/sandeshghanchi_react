@@ -171,7 +171,7 @@ export const loadUser = () => async (dispatch: Dispatch<any>) => {
   try {
     dispatch({ type: LOAD_USER_REQUEST });
     const cookies = new Cookies();
-    const token = cookies.get('token');
+    const token = cookies.get("token")||localStorage.getItem('token');
 
     const requestBody = {
       token: token
